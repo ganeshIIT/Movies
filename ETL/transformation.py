@@ -3,13 +3,13 @@ import pandas as pd
 from ast import literal_eval
 
 import helper
-import extraction
+import ETL.extraction as extraction
 
 cstring = helper.get_connstring()
 
 def tranformData():
     rawmovies = extraction.getRawMovies()
-    if not rawmovies:
+    if rawmovies.empty:
         return
     
     df_movies = rawmovies[[

@@ -7,5 +7,5 @@ import ETL.load as load
 
 print()
 print('Loading Transformed Data')
-load.loadTransformedData
+load.loadTransformedData()
 print("Done Loading Transformed Data")
