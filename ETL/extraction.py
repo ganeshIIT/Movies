@@ -13,6 +13,18 @@ cstring = helper.get_connstring()
 apikey = helper.get_apikey()
 
 
+def getRawMovies():
+    print("Getting additional RawMovies")
+    with pyodbc.connect(cstring) as conn:
+        query = "select * from MoviesRaw where id not in (select id from movies)"
+        moviesraw = pd.read_sql(query, conn)
+        if moviesraw.shape[0] > 0:
+            return moviesraw
+        else:
+            print("No additional raw movies found")
+    
+
+
 def getMovieIds():
     return pd.read_json(
         f'http://files.tmdb.org/p/exports/movie_ids_{fetchdate}.json.gz',
