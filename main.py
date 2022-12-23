@@ -8,4 +8,4 @@ import ETL.load as load
 print()
 print('Loading Transformed Data')
 load.loadTransformedData()
-print("Done Loading Transformed Data")
+print("-------All Done-------")

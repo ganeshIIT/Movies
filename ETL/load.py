@@ -12,8 +12,13 @@ def loadRawData():
 
 
 def loadTransformedData():
+    if not transformation.tranformData():
+        print("Data is already upto date")
+        return
     (movies, genres, productioncompanies, productioncountries,
      spokenlanguages) = transformation.tranformData()
+    
+    print(f"Identified {movies.shape[0]} records to load")
 
     print("Loading Movies...")
     dataloader.inc_load_with_index(df=movies, tbl="Movies")

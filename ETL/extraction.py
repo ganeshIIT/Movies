@@ -18,10 +18,10 @@ def getRawMovies():
     with pyodbc.connect(cstring) as conn:
         query = "select * from MoviesRaw where id not in (select id from movies)"
         moviesraw = pd.read_sql(query, conn)
-        if moviesraw.shape[0] > 0:
-            return moviesraw
-        else:
-            print("No additional raw movies found")
+        # if moviesraw.shape[0] > 0:
+        return moviesraw
+        # else:
+        #     print("No additional raw movies found")
     
 
 
