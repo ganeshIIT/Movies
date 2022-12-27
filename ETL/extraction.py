@@ -8,9 +8,13 @@ import dataloader
 import helper
 import pyodbc
 
+import warnings
+
 fetchdate = datetime.strftime(datetime.today() - timedelta(days=1), '%m_%d_%Y')
 cstring = helper.get_connstring()
 apikey = helper.get_apikey()
+
+warnings.filterwarnings('ignore')
 
 
 def getRawMovies():
@@ -22,7 +26,6 @@ def getRawMovies():
         return moviesraw
         # else:
         #     print("No additional raw movies found")
-    
 
 
 def getMovieIds():
@@ -157,6 +160,10 @@ def getAndDumpMoviesRaw():
         # query = "select id from movieids"
         query = "select id from movieids where id not in (select id from moviesraw)"
         ids = pd.read_sql(query, conn)
+    
+    if not ids.empty:
+            print("No new Ids found")
+            return
 
     for chunk in np.array_split(ids['id'], len(ids) // 500 + 1):
         session = requests.Session()

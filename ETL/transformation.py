@@ -5,6 +5,10 @@ from ast import literal_eval
 import helper
 import ETL.extraction as extraction
 
+import warnings
+
+warnings.filterwarnings('ignore')
+
 cstring = helper.get_connstring()
 
 def tranformData():
